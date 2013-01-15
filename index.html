@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Phinstagram - Demo - Sounden</title>
+    <meta name="author" content="Sounden">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <style>
+
+          /** default styles **/
+        * { margin: 0; padding: 0; }
+        html { height: 101%; }
+
+        body { font-family: Arial, Tahoma, sans-serif; font-size: 62.5%; line-height: 1; background: #eeeeee; }
+
+        a { color: #5484a7; text-decoration: none; }
+        a:hover { text-decoration: none; color: #356080; }
+
+        nav { display: block; height: 60px; background: #333; border-bottom: 1px solid #ddd; }
+        .wrap, nav .wrap { width: 710px; display: block; margin: 0 auto; }
+
+        nav #menu { list-style: none; margin-left: -1px; }
+        nav #menu li { float: left; padding: 0px 11px; }
+        nav #menu li:first-child { float: left; }
+        nav #menu li a { display: block; float: left; line-height: 55px; color: #bcbebc; font-size: 1.3em; text-decoration: none; }
+        nav #menu li a:hover { color: #eee; }
+        nav #menu li.floatr { float: right; margin-right: 40px; }
+
+        h2 { color: #777; font-weight: normal; font-size: 2em; margin: 20px 0px 5px 0px; }
+        p { color: #333; font-weight: normal; font-size: 1.3em; margin: 10px 0px 35px 0px; }
+
+        ol.phinstagram { list-style: none; }
+        ol.phinstagram li { width: 220px; height: 250px; margin-right: 15px; float: left; }
+        ol.phinstagram li.rowstart { clear: left; }
+        ol.phinstagram li div.shot { 
+              position: relative;
+              display: block;
+              clear: left;
+              margin-bottom: 8px;
+              background: #fff;
+              -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+              -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+        }
+
+        ol.phinstagram li div.shot img { padding: 10px; }
+        ol.phinstagram li span.meta { font-size: 1.2em; display: block; font-weight: bold; padding-left: 6px; }
+        ol.phinstagram li span.meta a { text-decoration: none; display: block; }
+        ol.phinstagram li span.meta img.avatar { float: left; margin-right: 6px; margin-top: -3px; }
+
+        footer { background: #fff; border-top: 1px solid #ddd; padding: 22px 0; }
+        footer p { font-size: 1.3em; font-weight: normal; color: #787878; }
+
+        .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
+        .clearfix { display: inline-block; }
+         
+        html[xmlns] .clearfix { display: block; }
+        * html .clearfix { height: 1%; }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="wrap">
+            <ul id="menu">
+                <li><a href="?username=sounden">@Sounden</a></li>
+                <li><a href="?username=upperdog">@Upperdog</a></li>
+                <li><a href="?username=skrillex">@skrillex</a></li>
+                <li><a href="?username=taylorswift">@taylorswift</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="wrap">
+        <h2><span id="name"></span> (<span id="followed_by">0</span>) <a class="instagram_site" href="">→</a></h2>
+        <p id="bio"></p>
+    
+        <ol id="phinstagram-list" class="phinstagram clearfix"></ol>
+    </div>
+    
+    <footer>
+        <div class="wrap">
+        <p><em>Brought to you by <strong><a href="http://sounden.com/">Sounden</a></strong></em></p>
+        </div>
+    </footer>
+
+    <script>
+    // set a username from PHP //
+    var username = '<?=$_GET["username"];?>';
+
+    $(document).ready(function() {
+
+        // define variable to store the profile data //
+        var profile;
+
+        // define variable to store the images object/array //
+        var images;
+
+        // ajax request to self //
+        $.ajax({
+            url: 'phinstagram.php',
+            dataType: 'json',
+            data: "username="+username,
+                success: function(result) 
+                {
+                    // re-map the object to suitable variable-names //
+                    profile = result[0][2][0];
+                    images = result[0][2][3];
+
+                    //append the user full name to H1 //
+                    $("#name").html(profile.full_name);
+                    $("#bio").html(profile.bio);
+                    $("#followed_by").html(profile.counts.followed_by);
+                    $(".instagram_site").attr({'href':'http://instagram.com/'+profile.username});
+
+                    // uncomment these to see the other properties available //
+                    //console.log(profile);
+                    //console.log(images);
+                    
+                    //counter image //
+                    var counter = 0;
+
+                    $( images ).each(function() 
+                    {
+                        // a new class needs to be added each 3:rd image //
+                        var row_start = '';
+
+                        if (counter % 3 == 0) { row_start = ' rowstart'; } else { row_start = ''; }
+
+                            //append each instagram image to ol elem with id phinstagram-list//
+                            $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.images.low_resolution.url+'" /></div><span class="meta">'+this.likes.count+' likes</span></li>');
+                            
+                        counter++;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
