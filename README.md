@@ -1,6 +1,6 @@
 # Phinstagram – Instagram Profile scrape (JSON)
 
-A simple PHP snippet to scrape the instagram.com/username website. This script will provide you with a JSON formatted object that will enable you to grab the most recent images shown on the users profile page [instagram.com/sounden](http://instagram.com/sounden) and present the images the way you want it.
+A simple PHP snippet to scrape the instagram.com/username website. This script will provide you with a JSON formatted object that will enable you to grab the most recent images shown on the users profile page [instagram.com/sounden](http://instagram.com/sounden) and present the data the way you want.
 
 # Why did I create Phinstagram?
 
