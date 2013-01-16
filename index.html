@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Phinstagram - Demo - Sounden</title>
-    <meta name="author" content="Sounden">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <meta name="author" content="@Sounden">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
     <style>
 
           /** default styles **/
@@ -72,7 +72,7 @@
     </nav>
     
     <div class="wrap">
-        <h2><span id="name"></span> (<span id="followed_by">0</span>) <a class="instagram_site" href="">→</a></h2>
+        <h2 class="title"><span id="name"></span> (<span id="followed_by">0</span>) <a class="instagram_site" href="">→</a></h2>
         <p id="bio"></p>
     
         <ol id="phinstagram-list" class="phinstagram clearfix"></ol>
@@ -80,7 +80,7 @@
     
     <footer>
         <div class="wrap">
-        <p><em>Brought to you by <strong><a href="http://sounden.com/">Sounden</a></strong></em></p>
+        <p><em>Phinstagram was brought to you by <strong><a href="http://sounden.com/">Sounden</a></strong></em></p>
         </div>
     </footer>
 
@@ -103,35 +103,42 @@
             data: "username="+username,
                 success: function(result) 
                 {
-                    // re-map the object to suitable variable-names //
-                    profile = result[0][2][0];
-                    images = result[0][2][3];
+                    //console.log(result);
 
-                    //append the user full name to H1 //
-                    $("#name").html(profile.full_name);
-                    $("#bio").html(profile.bio);
-                    $("#followed_by").html(profile.counts.followed_by);
-                    $(".instagram_site").attr({'href':'http://instagram.com/'+profile.username});
-
-                    // uncomment these to see the other properties available //
-                    //console.log(profile);
-                    //console.log(images);
-                    
-                    //counter image //
-                    var counter = 0;
-
-                    $( images ).each(function() 
+                    if(result.error) { $(".title").html("Unable to read/store .json data from local/remote site / code ("+result.error+")"); }
+                    else
                     {
-                        // a new class needs to be added each 3:rd image //
-                        var row_start = '';
+                        // re-map the object to suitable variable-names //
+                        profile = result[0][2][0];
+                        images = result[0][2][3];
 
-                        if (counter % 3 == 0) { row_start = ' rowstart'; } else { row_start = ''; }
+                        //append the user full name to H1 //
+                        $("#name").html(profile.full_name);
+                        $("#bio").html(profile.bio);
+                        $("#followed_by").html(profile.counts.followed_by);
+                        $(".instagram_site").attr({'href':'http://instagram.com/'+profile.username});
 
-                            //append each instagram image to ol elem with id phinstagram-list//
-                            $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.images.low_resolution.url+'" /></div><span class="meta">'+this.likes.count+' likes</span></li>');
-                            
-                        counter++;
-                    });
+                        // uncomment these to see the other properties available //
+                        //console.log(profile);
+                        //console.log(images);
+                        
+                        //counter image //
+                        var counter = 0;
+
+                        $( images ).each(function() 
+                        {
+                            // a new class needs to be added each 3:rd image //
+                            var row_start = '';
+
+                            if (counter % 3 == 0) { row_start = ' rowstart'; } else { row_start = ''; }
+                                // use https //
+                                this.images.low_resolution.url = this.images.low_resolution.url.replace(/^http:\/\//i, 'https://');
+                                //append each instagram image to ol elem with id phinstagram-list//
+                                $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.images.low_resolution.url+'" /></div><span class="meta">'+this.likes.count+' likes</span></li>');
+                                
+                            counter++;
+                        });
+                    }
                 }
             });
         });

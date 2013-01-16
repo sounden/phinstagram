@@ -4,7 +4,7 @@
 #
 #	Phinstagram - Instagram scrape/API/proxy 
 #	Author: Johan Sandén
-#	Sounden
+#	@Sounden
 #	www.sounden.com
 #	copywrong 2013
 #	
@@ -76,37 +76,19 @@ else
 
 							if($phinstagram_json_object == NULL) 
 							{
-									//echo "FAILED TO PARSE JSON!";
-									//error_log("Failed to parse JSON",0);
-										switch (json_last_error()) {
-									        case JSON_ERROR_NONE:
-									            echo ' - No errors';
-									        break;
-									        case JSON_ERROR_DEPTH:
-									            echo ' - Maximum stack depth exceeded';
-									        break;
-									        case JSON_ERROR_STATE_MISMATCH:
-									            echo ' - Underflow or the modes mismatch';
-									        break;
-									        case JSON_ERROR_CTRL_CHAR:
-									            echo ' - Unexpected control character found';
-									        break;
-									        case JSON_ERROR_SYNTAX:
-									            echo ' - Syntax error, malformed JSON';
-									        break;
-									        case JSON_ERROR_UTF8:
-									            echo ' - Malformed UTF-8 characters, possibly incorrectly encoded';
-									        break;
-									        default:
-									            echo ' - Unknown error';
-									        break;
-    									}	
-
-    								// return last working json string if it exists //
-    								if (file_exists(TMP_DIR."/".CACHE_FILE_NAME))
-    								{
+									   
+									// return last working json string if it exists //
+									if (file_exists(TMP_DIR."/".CACHE_FILE_NAME))
+									{
 										$phinstagram_json_object = json_decode(file_get_contents(TMP_DIR."/".CACHE_FILE_NAME));
-									}	
+									}
+									else
+									{
+										//oh nooo .. we didnt have a stored old json string on disk.. nor parsing instagram.com site succeeded!!! FAIL, DIE!
+										$phinstagram_json_object = array("error" => json_last_error());
+									}
+
+
 							}
 							else
 							{
@@ -118,7 +100,6 @@ else
 		} #end tag loop #
 
 } #end if statment time cache #
-
 header('Content-type: application/json');
 echo json_encode($phinstagram_json_object);
 ?>

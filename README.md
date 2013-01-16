@@ -7,9 +7,15 @@ A simple PHP snippet to get the last instagram images by a username i.e. [instag
 Well I wanted to get the last images from my [Instagr.am](http://instagr.am) account without connecting it to third party apps.
 I could not find any public RSS or JSON feeds, so I did this simple PHP scrape/proxy/ script that will act like a API scraping instagrams own site.
 
+
+
 # Installation
 
 Nothing fancy here, just download and review the example included.	
+
+## Live Demo
+
+Check it out [here](https://www.labyrint.com/demo/phinstagram/)
 
 ## Download the ZIP package
 
