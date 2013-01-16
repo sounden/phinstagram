@@ -1,13 +1,10 @@
 # Phinstagram – Instagram Scrape / Proxy / API
 
-A simple PHP snippet to get the last instagram images by a username i.e. [instagram.com/sounden](http://instagram.com/sounden) on your own webpage.
+A simple PHP snippet to APIfy instagram.com/username website. This script will provide you with a JSON API enable you to grab the most recent images shown on the users profile page [instagram.com/sounden](http://instagram.com/sounden) and present the images the way you want it.
 
 # Why did I create Phinstagram?
 
-Well I wanted to get the last images from my [Instagr.am](http://instagr.am) account without connecting it to third party apps.
-I could not find any public RSS or JSON feeds, so I did this simple PHP scrape/proxy/ script that will act like a API scraping instagrams own site.
-
-
+I wanted to get the last images from my [Instagr.am](http://instagr.am) account without connecting it to third party apps. I could not find any public RSS or JSON feeds from instagram, so what I did was this little simple PHP scrape/proxy/ script that will provide you with an JSON API towards the instagram website.
 
 # Installation
 
