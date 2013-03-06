@@ -63,10 +63,7 @@
     <nav>
         <div class="wrap">
             <ul id="menu">
-                <li><a href="?username=sounden">@Sounden</a></li>
-                <li><a href="?username=upperdog">@Upperdog</a></li>
-                <li><a href="?username=skrillex">@skrillex</a></li>
-                <li><a href="?username=taylorswift">@taylorswift</a></li>
+                <li><a href="https://labyrint.com">LABYRINT</a></li>
             </ul>
         </div>
     </nav>
@@ -86,7 +83,7 @@
 
     <script>
     // set a username from PHP //
-    var username = '<?=$_GET["username"];?>';
+    var username = 'sounden';
 
     $(document).ready(function() {
 
@@ -103,14 +100,14 @@
             data: "username="+username,
                 success: function(result) 
                 {
-                    //console.log(result);
+                    console.log(result);
 
                     if(result.error) { $(".title").html("Unable to read/store .json data from local/remote site / code ("+result.error+")"); }
                     else
                     {
                         // re-map the object to suitable variable-names //
-                        profile = result[0][2][0];
-                        images = result[0][2][3];
+                        profile = result[0][2][2]['profileUser'];
+                        images = result[3][2][3];
 
                         //append the user full name to H1 //
                         $("#name").html(profile.full_name);
