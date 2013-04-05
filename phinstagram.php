@@ -62,16 +62,14 @@ else
 		foreach ($tags as $tag) {
 
 				// lets find a match for window._jscalls //
-				if(preg_match('/window._jscalls/',$tag->nodeValue)) 
+				if(strlen($tag->nodeValue) > 1000)
 				{
-					$json_string = ereg_replace("\n", "", $tag->nodeValue);
-				    $json_string = trim($json_string);
-				    $json_string = str_replace('__DEV__ = false;window._jscalls = ','',$json_string);
-				    $json_string = str_replace('window._jscalls = ','',$json_string);
-				    $json_string = str_replace(';','',$json_string);
-				    $json_string = substr_replace($json_string ,"",-2,1);
-
-				    // decode the string to an object //
+			
+				$arr = explode("\n", $tag->nodeValue);
+				$json_string = $arr[7];
+				$json_string = trim($json_string);
+				$json_string = substr_replace($json_string ,"",-1,1);
+				// decode the string to an object //
 			    	$phinstagram_json_object = json_decode($json_string);
 
 							if($phinstagram_json_object == NULL) 
