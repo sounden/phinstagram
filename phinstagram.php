@@ -66,7 +66,19 @@ else
 				{
 			
 				$arr = explode("\n", $tag->nodeValue);
-				$json_string = $arr[7];
+
+				// check each rows for userprofile string
+				foreach($arr as $k => $value) 
+				{
+		                if(preg_match('/UserProfile/i',$value)) 
+		                {
+		                		$useIndex = $k;
+		                }
+		        }
+		        // set the index //
+        		$useIndex?$useIndex:'';
+
+        		$json_string = $arr[$useIndex];
 				$json_string = trim($json_string);
 				$json_string = substr_replace($json_string ,"",-1,1);
 				// decode the string to an object //
