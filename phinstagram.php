@@ -62,7 +62,7 @@ else
 		foreach ($tags as $tag) {
 
 				// lets find a match for window._jscalls //
-				if(strlen($tag->nodeValue) > 1000)
+				if(strlen($tag->nodeValue) > 10000)
 				{
 			
 				$arr = explode("\n", $tag->nodeValue);
@@ -75,12 +75,16 @@ else
 		                		$useIndex = $k;
 		                }
 		        }
+
 		        // set the index //
         		$useIndex?$useIndex:'';
 
         		$json_string = $arr[$useIndex];
 				$json_string = trim($json_string);
+				
+				$json_string = str_replace("window._sharedData = ",'',$json_string);
 				$json_string = substr_replace($json_string ,"",-1,1);
+
 				// decode the string to an object //
 			    	$phinstagram_json_object = json_decode($json_string);
 

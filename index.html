@@ -100,14 +100,14 @@
             data: "username="+username,
                 success: function(result) 
                 {
-                    //console.log(result);
-
+                    
                     if(result.error) { $(".title").html("Unable to read/store .json data from local/remote site / code ("+result.error+")"); }
                     else
                     {
+
                         // re-map the object to suitable variable-names //
-                        profile = result[2][0]['props']['user'];
-                        images = result[2][0]['props']['userMedia'];
+                        profile = result['entry_data']['UserProfile'][0]['user'];
+                        images  =  result['entry_data']['UserProfile'][0]['userMedia'];
 
                         //append the user full name to H1 //
                         $("#name").html(profile.full_name);
