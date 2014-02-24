@@ -12,7 +12,7 @@ Nothing fancy here, just download and review the example included.
 
 ## Live Demo
 
-Check it out [here](https://www.labyrint.com/demo/phinstagram/)
+Check it out [here](http://drive.sounden.se/phinstagram/)
 
 ## Download the ZIP package
 
