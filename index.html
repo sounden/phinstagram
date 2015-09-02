@@ -104,16 +104,17 @@
                     if(result.error) { $(".title").html("Unable to read/store .json data from local/remote site / code ("+result.error+")"); }
                     else
                     {
+			console.log(result);
 
                         // re-map the object to suitable variable-names //
-                        profile = result['entry_data']['UserProfile'][0]['user'];
-                        images  =  result['entry_data']['UserProfile'][0]['userMedia'];
+                        profile = result['entry_data']['ProfilePage'][0]['user'];
+                        images  =  result['entry_data']['ProfilePage'][0]['user']['media']['nodes']
 
                         //append the user full name to H1 //
                         $("#name").html(profile.full_name);
-                        $("#bio").html(profile.bio);
-                        $("#followed_by").html(profile.counts.followed_by);
-                        $(".instagram_site").attr({'href':'http://instagram.com/'+profile.username});
+                        $("#bio").html(profile.biography);
+                        $("#followed_by").html(profile.followed_by.count);
+                        $(".instagram_site").attr({'href':'https://instagram.com/'+profile.username});
 
                         // uncomment these to see the other properties available //
                         //console.log(profile);
@@ -129,9 +130,8 @@
 
                             if (counter % 3 == 0) { row_start = ' rowstart'; } else { row_start = ''; }
                                 // use https //
-                                this.images.low_resolution.url = this.images.low_resolution.url.replace(/^http:\/\//i, 'https://');
                                 //append each instagram image to ol elem with id phinstagram-list//
-                                $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.images.low_resolution.url+'" /></div><span class="meta">'+this.likes.count+' likes</span></li>');
+                                $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.display_src+'" /></div><span class="meta">'+this.likes.count+' likes</span></li>');
                                 
                             counter++;
                         });

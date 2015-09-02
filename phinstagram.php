@@ -6,7 +6,7 @@
 #	Author: Johan Sandén
 #	@Sounden
 #	www.sounden.com
-#	copywrong 2013
+#	copywrong 2015
 #	
 #	--------------------------------
 
@@ -38,7 +38,7 @@ else
 {
 		// get a fresh download //
 		//echo "fetch from cache";
-		$html = file_get_contents('http://instagram.com/'.$username);
+		$html = file_get_contents('https://instagram.com/'.$username);
 
 		// Create a new DOMDocument to parse the result in
 		$doc = new DOMDocument();
@@ -64,17 +64,17 @@ else
 				// lets find a match for window._jscalls //
 				if(strlen($tag->nodeValue) > 10000)
 				{
-			
+				
 				$arr = explode("\n", $tag->nodeValue);
-
+					
 				// check each rows for userprofile string
 				foreach($arr as $k => $value) 
 				{
-		                if(preg_match('/UserProfile/i',$value)) 
-		                {
+		                	if(preg_match('/window._sharedData/i',$value)) 
+		                	{
 		                		$useIndex = $k;
-		                }
-		        }
+		                	}
+		        	}
 
 		        // set the index //
         		$useIndex?$useIndex:'';
