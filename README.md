@@ -9,7 +9,8 @@ I wanted to grab get the latest images from my [instagram.com](http://instagram.
 # Installation
 
 Nothing fancy here, just download and review the example included.
-Make sure you have cURL extension installed for PHP.
+
+Make sure you have **cURL extension** installed for PHP.
 
 ## Live Demo
 
