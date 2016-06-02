@@ -4,15 +4,16 @@ A simple PHP snippet to scrape the instagram.com/username website. This script w
 
 # Why did I create Phinstagram?
 
-I wanted to be able to get the last images from my [instagram.com](http://instagram.com) feed without connecting my account to third party apps. I could not find any public RSS or JSON feeds from instagram, so what I did was this little simple PHP scrape/proxy script that will provide you with an JSON data feed scraped from the instagram website. 
+I wanted to grab get the latest images from my [instagram.com](http://instagram.com) feed without connecting my account to third party apps. Since I could not find any public RSS or JSON feeds from Instagram I made this little simple PHP scrape/proxy script that will provide you with an JSON data feed scraped from the public Instagram profile website.
 
 # Installation
 
-Nothing fancy here, just download and review the example included.	
+Nothing fancy here, just download and review the example included.
+Make sure you have cURL extension installed for PHP.
 
 ## Live Demo
 
-Check it out [here](http://drive.sounden.se/phinstagram/)
+Check it out [here](http://www.sounden.se/phinstagram)
 
 ## Download the ZIP package
 
@@ -24,7 +25,7 @@ Download the **[ZIP file](https://github.com/sounden/phinstagram/archive/master.
 
 # License (MIT)
 
-Copyright © 2013 Johan Sandén, http://sounden.com
+Copyright © 2016 Johan Sandén, @sounden http://www.sounden.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
