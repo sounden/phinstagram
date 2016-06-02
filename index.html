@@ -32,7 +32,7 @@
         ol.phinstagram { list-style: none; }
         ol.phinstagram li { width: 220px; height: 250px; margin-right: 15px; float: left; }
         ol.phinstagram li.rowstart { clear: left; }
-        ol.phinstagram li div.shot { 
+        ol.phinstagram li div.shot {
               position: relative;
               display: block;
               clear: left;
@@ -53,7 +53,7 @@
 
         .clearfix:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
         .clearfix { display: inline-block; }
-         
+
         html[xmlns] .clearfix { display: block; }
         * html .clearfix { height: 1%; }
 
@@ -67,14 +67,14 @@
             </ul>
         </div>
     </nav>
-    
+
     <div class="wrap">
         <h2 class="title"><span id="name"></span> (<span id="followed_by">0</span>) <a class="instagram_site" href="">→</a></h2>
         <p id="bio"></p>
-    
+
         <ol id="phinstagram-list" class="phinstagram clearfix"></ol>
     </div>
-    
+
     <footer>
         <div class="wrap">
         <p><em>Phinstagram was brought to you by <strong><a href="http://sounden.com/">Sounden</a></strong></em></p>
@@ -98,13 +98,13 @@
             url: 'phinstagram.php',
             dataType: 'json',
             data: "username="+username,
-                success: function(result) 
+                success: function(result)
                 {
-                    
+
                     if(result.error) { $(".title").html("Unable to read/store .json data from local/remote site / code ("+result.error+")"); }
                     else
                     {
-			console.log(result);
+			                   console.log(result);
 
                         // re-map the object to suitable variable-names //
                         profile = result['entry_data']['ProfilePage'][0]['user'];
@@ -119,11 +119,11 @@
                         // uncomment these to see the other properties available //
                         //console.log(profile);
                         //console.log(images);
-                        
+
                         //counter image //
                         var counter = 0;
 
-                        $( images ).each(function() 
+                        $( images ).each(function()
                         {
                             // a new class needs to be added each 3:rd image //
                             var row_start = '';
@@ -132,7 +132,7 @@
                                 // use https //
                                 //append each instagram image to ol elem with id phinstagram-list//
                                 $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.display_src+'" /></div><span class="meta">'+this.likes.count+' likes</span></li>');
-                                
+
                             counter++;
                         });
                     }
