@@ -15,6 +15,7 @@ Make sure you have **cURL extension** installed for PHP.
 ## Start simple PHP server in Docker
 
 `docker build -t phinstagram .`
+
 `docker run -d -p 8080:80 phinstagram`
 
 Now you should be able to open it in your local browser
