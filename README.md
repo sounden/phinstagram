@@ -18,7 +18,7 @@ Make sure you have **cURL extension** installed for PHP.
 
 `docker run -d -p 8080:80 phinstagram`
 
-Now you should be able to open it in your local browser
+Now you should be able to open it in your local browser http://localhost:8080
 
 ## Download the ZIP package
 
