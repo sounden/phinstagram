@@ -12,9 +12,12 @@ Nothing fancy here, just download and review the example included.
 
 Make sure you have **cURL extension** installed for PHP.
 
-## Live Demo
+## Start simple PHP server in Docker
 
-Check it out [here](http://www.sounden.se/phinstagram)
+`docker build -t phinstagram .`
+`docker run -d -p 8080:80 phinstagram`
+
+Now you should be able to open it in your local browser
 
 ## Download the ZIP package
 
