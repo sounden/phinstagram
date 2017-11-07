@@ -1,6 +1,6 @@
 # Phinstagram – Instagram Profile scrape (JSON)
 
-A simple PHP snippet to scrape the instagram.com/username website. This script will provide you with a JSON formatted object that will enable you to grab the most recent images shown on the users profile page [instagram.com/sounden](http://instagram.com/sounden) and present the data the way you want.
+A simple PHP snippet to scrape the https://www.instagram.com/<username> website. This script will provide you with a JSON formatted object that will enable you to grab the most recent images shown on the users profile page [instagram.com/sounden](https://wwww.instagram.com/sounden) and present the data the way you want.
 
 # Why did I create Phinstagram?
 
@@ -30,7 +30,7 @@ Download the **[ZIP file](https://github.com/sounden/phinstagram/archive/master.
 
 # License (MIT)
 
-Copyright © 2016 Johan Sandén, @sounden http://www.sounden.com
+Copyright © 2017 Johan Sandén, @sounden http://www.sounden.se
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

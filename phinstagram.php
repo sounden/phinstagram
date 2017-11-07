@@ -1,10 +1,10 @@
 <?php
 ############## ABOUT ########################
-#	Phinstagram - Instagram scrape/API/proxy
+#	Phinstagram - Instagram Scrape/API/proxy
 #	Author: Johan Sandén
 #	@sounden
-#	www.sounden.com
-#	Copycat 2016
+#	www.sounden.se
+#	Copycat 2017
 #############################################
 
 $phinstagram_json_object = null;
@@ -12,7 +12,7 @@ $phinstagram_json_object = null;
 // hello default @sounden
 $username = "sounden";
 
-// check if we have a username set in the GET variable
+// check if we have a username set in the GET variable e.g. http://localhost:8080/phinstagram.php?username=sounden
 if(isset($_GET['username'])) { $username = $_GET['username']; }
 
 # define variable for local cache
@@ -70,7 +70,7 @@ define("LOCAL_CACHE_IN_SECONDS", 300);
 			if (file_exists(TMP_DIR."/".CACHE_FILE_NAME)) {
 				$phinstagram_json_object = json_decode(file_get_contents(TMP_DIR."/".CACHE_FILE_NAME));
 			} else {
-				//oh nooo .. we didnt have a stored old json string on disk.. nor parsing instagram.com site succeeded!!! FAIL, DIE!
+				//oh nooo .. we didnt have a stored old json string on disk.. nor parsing instagram.com site succeeded!!! FAIL, DIE()!
 				$phinstagram_json_object = array("error" => json_last_error());
 				}
 		}
