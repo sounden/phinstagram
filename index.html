@@ -107,31 +107,28 @@
 			                   console.log(result);
 
                         // re-map the object to suitable variable-names //
-                        profile = result['entry_data']['ProfilePage'][0]['user'];
-                        images  =  result['entry_data']['ProfilePage'][0]['user']['media']['nodes']
+                        profile = result['entry_data']['ProfilePage'][0]['graphql']['user'];
+                        images  =  result['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges']
 
                         //append the user full name to H1 //
                         $("#name").html(profile.full_name);
                         $("#bio").html(profile.biography);
-                        $("#followed_by").html(profile.followed_by.count);
+                        $("#followed_by").html(profile.edge_followed_by.count);
                         $(".instagram_site").attr({'href':'https://instagram.com/'+profile.username});
-
-                        // uncomment these to see the other properties available //
-                        //console.log(profile);
-                        //console.log(images);
 
                         //counter image //
                         var counter = 0;
 
                         $( images ).each(function()
                         {
+
                             // a new class needs to be added each 3:rd image //
                             var row_start = '';
 
                             if (counter % 3 == 0) { row_start = ' rowstart'; } else { row_start = ''; }
                                 // use https //
                                 //append each instagram image to ol elem with id phinstagram-list//
-                                $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.display_src+'" /></div><span class="meta">'+this.likes.count+' likes</span></li>');
+                                $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.node.display_url+'" /></div><span class="meta">'+this.node.dge_liked_by+' likes</span></li>');
 
                             counter++;
                         });

@@ -55,9 +55,9 @@ define("LOCAL_CACHE_IN_SECONDS", 300);
 			if (strpos($line, 'window._sharedData = ') !== false) {
 				// do some cleanup before we can use it as json
 				$json_string = str_replace("window._sharedData = ",'',$line);
-				// Fix for issue #2, thanks to @slaymantis
-				$json_string = substr($json_string, 0, strpos($json_string,'!function'));
-				//
+				//$json_string = substr($json_string, 0, -1);
+				$json_string = str_replace(';', ',',$json_string);
+				// replace last string
 				$json_string = substr_replace($json_string ,"",-1,1);
 				// decode the string to an object //
 				$phinstagram_json_object = json_decode($json_string);
@@ -80,5 +80,5 @@ define("LOCAL_CACHE_IN_SECONDS", 300);
 			file_put_contents(TMP_DIR."/".CACHE_FILE_NAME, $json_string);
 		}
 	} #end if statment time cache #
-header('Content-type: application/json');
+//header('Content-type: application/json');
 echo json_encode($phinstagram_json_object);
