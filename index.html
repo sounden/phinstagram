@@ -83,7 +83,7 @@
 
     <script>
     // set a username from PHP //
-    var username = 'sounden';
+    var username = 'instagram';
 
     $(document).ready(function() {
 
@@ -128,7 +128,7 @@
                             if (counter % 3 == 0) { row_start = ' rowstart'; } else { row_start = ''; }
                                 // use https //
                                 //append each instagram image to ol elem with id phinstagram-list//
-                                $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.node.display_url+'" /></div><span class="meta">'+this.node.dge_liked_by+' likes</span></li>');
+                                $("#phinstagram-list").append('<li id="screen-'+counter+'" class="group'+row_start+'"><div class="shot"><img width="200px" src="'+this.node.display_url+'" /></div><span class="meta">'+this.node.edge_liked_by.count+' likes</span></li>');
 
                             counter++;
                         });

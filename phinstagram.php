@@ -9,10 +9,10 @@
 
 $phinstagram_json_object = null;
 
-// hello default @sounden
-$username = "sounden";
+// hello default @instagram
+$username = "instagram";
 
-// check if we have a username set in the GET variable e.g. http://localhost:8080/phinstagram.php?username=sounden
+// check if we have a username set in the GET variable e.g. http://localhost:8080/phinstagram.php?username=instagram
 if(isset($_GET['username'])) { $username = $_GET['username']; }
 
 # define variable for local cache
@@ -26,6 +26,25 @@ define("LOCAL_CACHE_IN_SECONDS", 300);
 	{
 			// fetch from disk //
 			$phinstagram_json_object = json_decode(file_get_contents(TMP_DIR."/".CACHE_FILE_NAME));
+
+			// counter
+			$i = 0;
+
+			//loop through the images to download locally
+			foreach ($phinstagram_json_object->entry_data->ProfilePage[0]->graphql->user->edge_owner_to_timeline_media->edges as $image) {
+				$img_filename = explode("?",basename($image->node->display_url))[0];
+
+				// check if file exists
+				if(!file_exists(TMP_DIR."/".$img_filename)) {
+					// download image
+					file_put_contents(TMP_DIR."/".$img_filename, file_get_contents($image->node->display_url));
+				}
+				// rewrite the URL to the local file for the object
+				$phinstagram_json_object->entry_data->ProfilePage[0]->graphql->user->edge_owner_to_timeline_media->edges[$i]->node->display_url = $img_filename;
+				
+				$i++;	
+				
+			}
 	}
 	else
 	{
@@ -63,11 +82,12 @@ define("LOCAL_CACHE_IN_SECONDS", 300);
 				$phinstagram_json_object = json_decode($json_string);
 			}
 		}
-
+		// if we fail to create a valid object, we have a problem //
 		if($phinstagram_json_object == NULL)
 		{
-			// return last working json string if it exists //
+			// try to return last working json string if it exists //
 			if (file_exists(TMP_DIR."/".CACHE_FILE_NAME)) {
+				// load from disk //
 				$phinstagram_json_object = json_decode(file_get_contents(TMP_DIR."/".CACHE_FILE_NAME));
 			} else {
 				//oh nooo .. we didnt have a stored old json string on disk.. nor parsing instagram.com site succeeded!!! FAIL, DIE()!
@@ -78,7 +98,29 @@ define("LOCAL_CACHE_IN_SECONDS", 300);
 		{
 			// save to local cache if the new one works //
 			file_put_contents(TMP_DIR."/".CACHE_FILE_NAME, $json_string);
+
+			//loop through the images to download locally
+			// counter
+			$i = 0;
+
+			foreach ($phinstagram_json_object->entry_data->ProfilePage[0]->graphql->user->edge_owner_to_timeline_media->edges as $image) {
+				$img_filename = explode("?",basename($image->node->display_url))[0];
+
+				// check if file exists
+				if(!file_exists(TMP_DIR."/".$img_filename)) {
+					// download image
+					file_put_contents(TMP_DIR."/".$img_filename, file_get_contents($image->node->display_url));
+				}
+				// rewrite the URL to the local file for the object
+				$phinstagram_json_object->entry_data->ProfilePage[0]->graphql->user->edge_owner_to_timeline_media->edges[$i]->node->display_url = $img_filename;
+				
+				$i++;	
+				
+			}
+
 		}
 	} #end if statment time cache #
+
 //header('Content-type: application/json');
-echo json_encode($phinstagram_json_object);
+print_r(json_encode($phinstagram_json_object));
+

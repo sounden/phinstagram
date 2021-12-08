@@ -1,6 +1,6 @@
 # Phinstagram – Instagram Profile scrape (JSON)
 
-A simple PHP snippet to scrape the https://www.instagram.com/<username> website. This script will provide you with a JSON formatted object that will enable you to grab the most recent images shown on the users profile page [instagram.com/sounden](https://wwww.instagram.com/sounden) and present the data the way you want.
+A simple PHP snippet to scrape the https://www.instagram.com/<username> website. This script will provide you with a JSON formatted object that will enable you to grab the most recent images shown on the users profile page [instagram.com/sounden](https://www.instagram.com/sounden) and present the data the way you want.
 
 # Why did I create Phinstagram?
 
@@ -19,6 +19,12 @@ Make sure you have **cURL extension** installed for PHP.
 `docker run -d -p 8080:80 phinstagram`
 
 Now you should be able to open it in your local browser http://localhost:8080
+
+
+## To check JSON output for another instagram user use the URL
+
+`http://localhost:8080/phinstagram.php?username=sounden`
+
 
 ## Download the ZIP package
 
